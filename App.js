@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
-// --- Stack A ---
+
 function ScreenA1({ navigation }) {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
@@ -40,7 +40,6 @@ function StackANavigator() {
   );
 }
 
-// --- Otros Stacks similares ---
 function DummyScreen({ title }) {
   return (
     <View style={styles.screenB}>
@@ -58,7 +57,6 @@ function StackBNavigator() {
     </StackB.Navigator>
   );
 }
-// Puedes repetir para StackC y StackD.
 
 const Tab = createBottomTabNavigator();
 function MyTabs() {
@@ -68,7 +66,6 @@ function MyTabs() {
         options={{ tabBarIcon: ({ color }) => (<Ionicons name="home" size={24} color={color} />) }} />
       <Tab.Screen name="Buscar" component={StackBNavigator}
         options={{ tabBarIcon: ({ color }) => (<Ionicons name="search" size={24} color={color} />) }} />
-      {/* Agregar StackC y StackD similares */}
     </Tab.Navigator>
   );
 }
