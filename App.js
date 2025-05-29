@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 
-function ScreenA1({ navigation }) {
+function Home({ navigation }) {
   const [name, setName] = React.useState('');
   const [phone, setPhone] = React.useState('');
 
@@ -15,12 +15,12 @@ function ScreenA1({ navigation }) {
       <Text style={styles.text}>Ingrese sus datos</Text>
       <TextInput placeholder="Nombre" onChangeText={setName} />
       <TextInput placeholder="Teléfono" onChangeText={setPhone} />
-      <Button title="Enviar" onPress={() => navigation.navigate('ScreenA2', { name, phone })} />
+      <Button title="Enviar" onPress={() => navigation.navigate('Results', { name, phone })} />
     </View>
   );
 }
 
-function ScreenA2({ route }) {
+function Results({ route }) {
   const { name, phone } = route.params;
   return (
     <View style={styles.screenA}>
@@ -34,8 +34,8 @@ const StackA = createNativeStackNavigator();
 function StackANavigator() {
   return (
     <StackA.Navigator>
-      <StackA.Screen name="ScreenA1" component={ScreenA1} />
-      <StackA.Screen name="ScreenA2" component={ScreenA2} />
+      <StackA.Screen name="Home" component={Home} />
+      <StackA.Screen name="Results" component={Results} />
     </StackA.Navigator>
   );
 }
@@ -52,9 +52,34 @@ const StackB = createNativeStackNavigator();
 function StackBNavigator() {
   return (
     <StackB.Navigator>
-      <StackB.Screen name="ScreenB1" children={() => <DummyScreen title="Buscador" />} />
+      <StackB.Screen name="Search" children={() => <DummyScreen title="Buscador" />} />
       <StackB.Screen name="ScreenB2" children={() => <DummyScreen title="Resultados" />} />
     </StackB.Navigator>
+  );
+}
+
+const StackC= createNativeStackNavigator();
+function StackCNavigator(){
+  return(
+    <View style={styles.screenC}>
+      <StackC.Navigator>
+      <StackC.Screen name= "Profile"children={() => <DummyScreen title="Profile" />}/>
+      <StackD.Screen name="Settings"children={() => <DummyScreen title="Settings" />}/>
+      
+    </StackC.Navigator>
+    </View>
+    
+  );
+}
+
+const StackD= createNativeStackNavigator();
+function StackDNavigator(){
+  return(
+    <View style={styles.screenD}>
+      <StackD.Navigator>
+      <StackD.Screen name="Settings"children={() => <DummyScreen title="Settings" />}/>
+      </StackD.Navigator>
+    </View>
   );
 }
 
@@ -66,6 +91,10 @@ function MyTabs() {
         options={{ tabBarIcon: ({ color }) => (<Ionicons name="home" size={24} color={color} />) }} />
       <Tab.Screen name="Buscar" component={StackBNavigator}
         options={{ tabBarIcon: ({ color }) => (<Ionicons name="search" size={24} color={color} />) }} />
+      <Tab.Screen name="Settings" component={StackDNavigator}
+        options={{ tabBarIcon: ({ color }) => (<Ionicons name="settings" size={24} color={color} />) }} />
+      <Tab.Screen name="Profile" component={StackCNavigator}
+        options={{ tabBarIcon: ({ color }) => (<Ionicons name="face-man-profile" size={24} color={color} />) }} />
     </Tab.Navigator>
   );
 }
@@ -81,5 +110,7 @@ export default function App() {
 const styles = StyleSheet.create({
   screenA: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fce4ec' },
   screenB: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e8f5e9' },
+  screenC: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#d33817' },
+  screenD: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#37e1c2' },
   text: { fontSize: 20, color: '#333', margin: 10 },
 });
